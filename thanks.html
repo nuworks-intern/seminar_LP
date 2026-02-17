@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>お申し込みありがとうございます｜SNS Bridge</title>
+  <title>お申込みありがとうございます｜SNS Bridge</title>
 
   <!-- できれば検索に出さない（広告LPの送信完了ページ想定） -->
   <meta name="robots" content="noindex, nofollow" />
@@ -17,8 +17,6 @@
       --accent-rgb: 193, 53, 132;
       --cta:#833ab4;
       --cta-rgb: 131, 58, 180;
-      --navy: var(--accent);
-      --navy2: var(--accent);
       --line: rgba(var(--accent-rgb), .16);
       --shadow: 0 18px 48px rgba(var(--accent-rgb), .18);
       --radius2:26px;
@@ -135,7 +133,7 @@
     }
 
     .title{
-      margin:0 0 10px;
+      margin:0 0 12px;
       font-size: clamp(22px, 3.2vw, 34px);
       line-height:1.2;
       letter-spacing:.01em;
@@ -143,32 +141,49 @@
     }
 
     .lead{
-      margin:0 0 18px;
+      margin:0;
       color:var(--muted);
-      line-height:1.8;
+      line-height:1.9;
       font-size:15px;
     }
 
-    .steps{
-      margin: 16px 0 0;
-      padding: 0;
-      list-style: none;
-      display: grid;
-      gap: 10px;
-    }
-    .step{
-      border:1px solid rgba(var(--accent-rgb), .14);
+    /* 折りたたみFAQ */
+    .faq{
+      margin-top:16px;
+      border:1px solid var(--line);
+      border-radius:16px;
       background: rgba(255,255,255,.86);
-      border-radius: 16px;
-      padding: 14px 14px;
+      padding:10px 12px;
     }
-    .step b{ color: var(--ink); }
-    .step p{
-      margin:6px 0 0;
-      color: var(--muted);
-      line-height:1.75;
+    .faq summary{
+      cursor:pointer;
+      font-weight:900;
+      color:var(--ink);
+      list-style:none;
+      outline:none;
+    }
+    /* 三角アイコン（Safariなどで消える場合があるので疑似要素で） */
+    .faq summary::-webkit-details-marker{ display:none; }
+    .faq summary::after{
+      content:"▾";
+      float:right;
+      color: rgba(var(--accent-rgb), .7);
+      font-weight:900;
+      transition: transform .15s ease;
+    }
+    .faq[open] summary::after{ transform: rotate(180deg); }
+
+    .faq__body{
+      margin-top:10px;
+      color:var(--muted);
       font-size:14px;
+      line-height:1.8;
     }
+    .faq__body ul{
+      margin:0;
+      padding-left: 18px;
+    }
+    .faq__body li{ margin:6px 0; }
 
     .actions{
       margin-top: 18px;
@@ -185,7 +200,7 @@
       border:0;
       background:var(--cta);
       color:#fff;
-      font-weight:800;
+      font-weight:900;
       font-size:14px;
       letter-spacing:.02em;
       box-shadow: 0 16px 40px rgba(var(--cta-rgb), .26);
@@ -231,31 +246,26 @@
   <main>
     <div class="wrap">
       <div class="panel" role="status" aria-live="polite">
-        <h1 class="title">お申し込みありがとうございます</h1>
+        <h1 class="title">お申込みありがとうございます</h1>
+
         <p class="lead">
-          送信が完了しました。ご入力いただいたメールアドレス宛に、<b>ウェビナー参加情報（Zoom URL）</b>をお送りします。
+          ご入力いただいたメールアドレス宛に、ウェビナー参加情報（Zoom URL）をお送りいたします。<br>
+          当日は時間になったらメール内のZoom URLからご参加ください。
         </p>
 
-        <ul class="steps">
-          <li class="step">
-            <b>① メールをご確認ください</b>
-            <p>通常は数分以内に届きます。届かない場合は、迷惑メールフォルダもご確認ください。</p>
-          </li>
-          <li class="step">
-            <b>② 参加枠の時間になったら Zoom へ</b>
-            <p>メール内の Zoom URL からご参加ください。</p>
-          </li>
-          <li class="step">
-            <b>③ 万一メールが届かない場合</b>
-            <p>入力したメールアドレスが誤っている可能性があります。お手数ですが、もう一度お申し込みください。</p>
-          </li>
-        </ul>
+        <details class="faq">
+          <summary>メールが届かない場合はこちら</summary>
+          <div class="faq__body">
+            <ul>
+              <li>迷惑メールフォルダをご確認ください</li>
+              <li>入力メールアドレスに誤りがないかご確認ください</li>
+              <li>再申込みしても届かない場合は、お問い合わせください</li>
+            </ul>
+          </div>
+        </details>
 
         <div class="actions">
-          <!-- トップへ戻る（サイトが / でトップならこれでOK） -->
           <a class="btn btn--ghost" href="/seminar_LP/">トップへ戻る</a>
-
-          <!-- 再申込み：トップにフォームがある想定なら #form へ -->
           <a class="btn" href="/seminar_LP/#form">もう一度申し込む</a>
         </div>
 
