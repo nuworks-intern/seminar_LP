@@ -800,52 +800,72 @@
 
     /* ====== FV右：キービジュアル（画像） ====== */
     .hero-visual{
-    border: none !important;
-    border-radius: var(--radius2);
-    background: rgba(255,255,255,.86);
-    background: transparent !important;
-    box-shadow: none !important;
-    padding: 0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    min-height: 360px;
+      border: none !important;
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,.86);
+      background: transparent !important;
+      box-shadow: none !important;
+      padding: 0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height: 360px;
     }
+
+    /* ✅ 共通ではズラさない（スマホ含む） */
     .hero-visual picture{
-      transform: translate(-50px, -50px);
+      transform: none;
     }
+
+    /* ✅ PCのときだけズラす */
+    @media (min-width: 981px){
+      .hero-visual picture{
+        transform: translate(-50px, -50px);
+      }
+    }
+
     .hero-visual img{
-    width:100%;
-    max-width: 420px;
-    height:auto;
-    display:block;
+      width:100%;
+      max-width: 420px;
+      height:auto;
+      display:block;
     }
 
     /* ====== 実績ブロック：次セクションへ移動して中央寄せ ====== */
     .metrics-card{
-    max-width: 980px;
-    margin: 0 auto;
-    text-align:center;
+      max-width: 980px;
+      margin: 0 auto;
+      text-align:center;
     }
     .metrics-card .platforms{
-    margin-top:18px;
-    text-align:left; /* 中身は読みやすく左寄せ、ブロック自体は中央配置 */
+      margin-top:18px;
+      text-align:left; /* 中身は読みやすく左寄せ、ブロック自体は中央配置 */
     }
     .metrics-card .event{
-    text-align:left;
+      text-align:left;
     }
 
     @media (max-width: 980px){
-    .hero-visual{ min-height: 0; }
-    .hero-visual img{ max-width: 520px; }
-    .metrics-card .platforms,
-    .metrics-card .event{ text-align:left; }
+      .hero-visual{ min-height: 0; }
+      .hero-visual img{ max-width: 520px; }
+      .hero-visual picture{ transform: translate(0, -50px); }
+      .metrics-card .platforms,
+      .metrics-card .event{ text-align:left; }
     }
 
     /* ====== FV 左本文：少し右寄りにする（FVだけに効かせる） ====== */
+    /* ✅ 共通では寄せない（スマホ含む） */
     .hero-copy{
-      padding-left: 12px; /* 12〜28pxあたりで微調整 */
+      padding-left: 0;
     }
+
+    /* ✅ PCだけ右寄せ（今までの12pxをここへ） */
+    @media (min-width: 981px){
+      .hero-copy{
+        padding-left: 12px; /* 12〜28pxで微調整 */
+      }
+    }
+
 
      /* ====== スクロールバーを「必ず」表示（Edge/Win11） ======
        目的：
@@ -939,10 +959,6 @@
           <!-- FV右：キービジュアル画像 -->
           <div class="hero-visual reveal" aria-label="キービジュアル">
             <picture>
-                <!-- 推奨：WebP 1x/2x -->
-                <!-- <source type="image/webp"
-                  srcset="./images/fv-phone.webp 1x, ./images/fv-phone@2x.webp 2x"> -->
-                <!-- フォールバック（PNGでもOK。1枚だけなら fv-phone.png をここに） -->
                 <img
                   src="./images/fv-phone.png"
                   width="1024" height="1024"
@@ -952,90 +968,6 @@
                 />
             </picture>
           </div>
-
-
-          <!-- FV：実績 -->
-          <!-- <aside class="hero-card reveal" aria-label="実績">
-            <div style="font-weight:900; color:var(--ink); letter-spacing:.01em;">プレゼンターのアカウント実績</div>
-
-            <div class="platforms" aria-label="フォロワー数">
-              <div class="platform">
-                <div class="platform__top">
-                  <div class="platform__icon" aria-hidden="true">
-                    <img src="./images/icon-tiktok.webp" alt="" loading="lazy" decoding="async" />
-                  </div>
-                  <div class="platform__name">TikTok</div>
-                </div>
-                <div class="platform__stats">
-                  <div class="platform__stat">
-                    <div class="platform__meta">フォロワー</div>
-                    <div class="platform__value">11.5万</div>
-                  </div>
-
-                  <div class="platform__stat platform__stat--right">
-                    <div class="platform__meta">月間再生</div>
-                    <div class="platform__value">1600万</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="platform">
-                <div class="platform__top">
-                  <div class="platform__icon" aria-hidden="true">
-                    <img src="./images/icon-instagram.webp" alt="" loading="lazy" decoding="async" />
-                  </div>
-                  <div class="platform__name">Instagram</div>
-                </div>
-                <div class="platform__stats">
-                  <div class="platform__stat">
-                    <div class="platform__meta">フォロワー</div>
-                    <div class="platform__value">11.5万</div>
-                  </div>
-
-                  <div class="platform__stat platform__stat--right">
-                    <div class="platform__meta">月間再生</div>
-                    <div class="platform__value">4000万</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="platform">
-                <div class="platform__top">
-                  <div class="platform__icon" aria-hidden="true">
-                    <img src="./images/icon-youtube.webp" alt="" loading="lazy" decoding="async" />
-                  </div>
-                  <div class="platform__name">YouTube</div>
-                </div>
-                <div class="platform__stats">
-                  <div class="platform__stat">
-                    <div class="platform__meta">フォロワー</div>
-                    <div class="platform__value">11.5万</div>
-                  </div>
-
-                  <div class="platform__stat platform__stat--right">
-                    <div class="platform__meta">月間再生</div>
-                    <div class="platform__value">5000万</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="event">
-              <div class="event__head">開催日程</div>
-
-              <div class="event__body">
-                <div class="event__dates">
-                  <div>4/14(火) 15:00~/20:00~</div>
-                  <div>4/15(水) 15:00~/20:00~</div>
-                </div>
-
-                <div class="event__badges" aria-label="開催特典">
-                  <span class="event__badge">参加費無料</span>
-                  <span class="event__badge">特典付き</span>
-                </div>
-              </div>
-            </div>
-          </aside> -->
         </div>
       </div>
     </section>
@@ -1239,7 +1171,7 @@
       <div class="wrap reveal">
         <h2 class="h2">お申し込み（無料）</h2>
 
-        <form id="signupForm" action="https://script.google.com/macros/s/AKfycbwBCgZnJ25Db_51pQ32UT_xkSGekOgEje9vUIaogis5jEHEJom6mcxSdQLU0XAFzqNqYg/exec" method="post" accept-charset="UTF-8">
+        <form id="signupForm" action="https://script.google.com/macros/s/AKfycbxuXUuzKiGNSrUOycGQUZSkFv9mX4MpqcRe6oZJOLvZwgPRKuRUarimsPCVsdf2EL_b5w/exec" method="post" accept-charset="UTF-8">
           <!-- 迷惑送信対策：ハニーポット -->
           <input type="hidden" name="page_url" value="">
           <input type="hidden" name="user_agent" value="">
